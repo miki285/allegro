@@ -3,9 +3,9 @@ package com.krzyszczak.allegroMovies.service;
 import com.krzyszczak.allegroMovies.model.Movie;
 import java.util.List;
 
-public interface MovieService {
+public interface MovieServiceInt {
     Movie findById(long id);
-    Movie findByName(String name);
-    boolean saveMovie(Movie movie);
-    List<Movie> findAllMovies();
+    Movie findByTitle(String name);
+    boolean addNew(Movie movie);
+    List<Movie> findAll();
 }

@@ -8,6 +8,13 @@ public class Movie {
     private int year;
     private String director;
 
+    public Movie(long id, String title, int year, String director) {
+        this.id = id;
+        this.title = title;
+        this.year = year;
+        this.director = director;
+    }
+
     public long getId() {
         return id;
     }
@@ -58,10 +65,9 @@ public class Movie {
         if (this == o) return true;
         if (!(o instanceof Movie)) return false;
         Movie movie = (Movie) o;
-        return getId() == movie.getId() &&
-                getYear() == movie.getYear() &&
-                Objects.equals(getTitle(), movie.getTitle()) &&
-                Objects.equals(getDirector(), movie.getDirector());
+        return  getYear() == movie.getYear() &&
+                getTitle().equalsIgnoreCase(movie.getTitle()) &&
+                getDirector().equalsIgnoreCase(movie.getDirector());
     }
 
     @Override
