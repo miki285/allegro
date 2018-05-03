@@ -2,6 +2,10 @@ package com.krzyszczak.allegroMovies.model;
 
 import java.util.Objects;
 
+
+/**
+ *
+ */
 public class Movie {
     private long id;
     private String title;
@@ -53,16 +57,6 @@ public class Movie {
 
     }
 
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", year=" + year +
-                ", director='" + director + '\'' +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {

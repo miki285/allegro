@@ -2,14 +2,14 @@ package com.krzyszczak.allegroMovies.service;
 
 import com.krzyszczak.allegroMovies.model.Movie;
 import org.springframework.stereotype.Service;
-import com.krzyszczak.allegroMovies.model.Movie;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 
 
 @Service("movieService")
-public class MovieServiceImp implements MovieServiceInt{
+public class MovieServiceImp implements MovieService {
 
     final AtomicLong orderIdGenerator=new AtomicLong(0);
     private static List<Movie> movies;
