@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 
+
 @Service("movieService")
 public class MovieServiceImp implements MovieServiceInt{
 
@@ -36,9 +37,9 @@ public class MovieServiceImp implements MovieServiceInt{
     }
 
     @Override
-    public Movie findByTitle(String name) {
+    public Movie findByTitle(String title){
         for(Movie movie: movies){
-            if(movie.getTitle().equalsIgnoreCase(name))
+            if(movie.getTitle().equalsIgnoreCase(title))
                 return movie;
         }
         return null;
@@ -50,12 +51,17 @@ public class MovieServiceImp implements MovieServiceInt{
             if(movie.equals(newMovie))
                 return false;
         }
+        newMovie.setId(orderIdGenerator.incrementAndGet());
         movies.add(newMovie);
         return true;
     }
 
     @Override
-    public List<Movie> findAll() {
-        return movies;
+    public List<String> findAll() {
+        List<String> moviesList=new ArrayList<String>();
+        for(Movie movie:movies){
+            moviesList.add("ID:"+movie.getId()+ ", Title:"+movie.getTitle());
+        }
+        return moviesList;
     }
 }

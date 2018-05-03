@@ -8,6 +8,10 @@ public class Movie {
     private int year;
     private String director;
 
+    public Movie(){
+        id=0;
+    }
+
     public Movie(long id, String title, int year, String director) {
         this.id = id;
         this.title = title;

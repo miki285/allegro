@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface MovieServiceInt {
     Movie findById(long id);
-    Movie findByTitle(String name);
+    Movie findByTitle(String title);
     boolean addNew(Movie movie);
-    List<Movie> findAll();
+    List<String> findAll();
 }

@@ -1,37 +1,50 @@
 package com.krzyszczak.allegroMovies.controler;
 
 import com.krzyszczak.allegroMovies.model.Movie;
-import com.krzyszczak.allegroMovies.service.*;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import com.krzyszczak.allegroMovies.service.MovieServiceImp;
+import com.krzyszczak.allegroMovies.service.MovieServiceInt;
+import com.krzyszczak.allegroMovies.utils.CustomMessage;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api")
 public class MovieRestApiControler {
 
-    MovieServiceInt movieServiceInt= new MovieServiceImp();
+    private MovieServiceInt movieServiceInt= new MovieServiceImp();
 
     @GetMapping("/movie")
-    public List<Movie> listAllMovies() {
-        return movieServiceInt.findAll();
+    public ResponseEntity<?> listAllMovies() {
+        List<String> moviesList=movieServiceInt.findAll();
+        if(moviesList.isEmpty())
+            return new ResponseEntity<>(new CustomMessage("No movies in database."),
+                    HttpStatus.NO_CONTENT);
+        else
+            return new ResponseEntity<>(movieServiceInt.findAll(),
+                HttpStatus.OK);
     }
 
     @GetMapping("/movie/{id}")
-    public Movie selectMovieById(@PathVariable("id") long id){
-        return movieServiceInt.findById(id);
+    public ResponseEntity<?> selectMovieById(@PathVariable("id") long id){
+        Movie movie=movieServiceInt.findById(id);
+        if(movie==null)
+            return new ResponseEntity<>(new CustomMessage("Selected movie not found."),
+                    HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity<>(movie, HttpStatus.OK);
     }
+    @PostMapping("/movie")
+    public ResponseEntity<?> addMovie(@RequestBody Movie movie) {
+        if (movieServiceInt.addNew(movie)) {
+            return new ResponseEntity<>(new CustomMessage("New movie added successfully"), HttpStatus.OK);
+        } else
+            return new ResponseEntity<>(new CustomMessage("Selected movie exists"),
+                    HttpStatus.CONFLICT);
 
-    @GetMapping("/movie/{title}")
-    public Movie selectMovieByName(@PathVariable("title") String title){
-        return movieServiceInt.findByTitle(title);
     }
-
-
 }
