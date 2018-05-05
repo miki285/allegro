@@ -6,6 +6,6 @@ import java.util.List;
 public interface MovieService {
     Movie findById(long id);
     Movie findByTitle(String title);
-    boolean addNew(Movie movie);
+    boolean addNew(Movie newMovie);
     List<String> listAllFiles();
 }

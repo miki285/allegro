@@ -29,11 +29,10 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public Movie findById(long id) {
-        for(Movie movie: movies){
-            if(movie.getId()==id)
-                return movie;
-        }
-        return null;
+        if(movies.size()>= id && id > 0)
+            return movies.get((int)id-1);
+        else
+            return null;
     }
 
     @Override
@@ -47,10 +46,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public boolean addNew(Movie newMovie) {
-        for(Movie movie: movies){
-            if(movie.equals(newMovie))
-                return false;
-        }
+
+        if(movies.contains(newMovie))
+            return false;
         newMovie.setId(orderIdGenerator.incrementAndGet());
         movies.add(newMovie);
         return true;
