@@ -1,1 +1,1 @@
-# allegro
+# Allegro- zadanie stażowe.
