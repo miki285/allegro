@@ -7,5 +7,5 @@ public interface MovieService {
     Movie findById(long id);
     Movie findByTitle(String title);
     boolean addNew(Movie movie);
-    List<String> findAll();
+    List<String> listAllFiles();
 }

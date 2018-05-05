@@ -9,12 +9,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 
 @Service("movieService")
-public class MovieServiceImp implements MovieService {
+public class MovieServiceImpl implements MovieService {
 
     final AtomicLong orderIdGenerator=new AtomicLong(0);
     private static List<Movie> movies;
 
-    public MovieServiceImp() {
+    public MovieServiceImpl() {
         movies=populateDummyMovies();
     }
 
@@ -57,7 +57,7 @@ public class MovieServiceImp implements MovieService {
     }
 
     @Override
-    public List<String> findAll() {
+    public List<String> listAllFiles() {
         List<String> moviesList=new ArrayList<String>();
         for(Movie movie:movies){
             moviesList.add("ID:"+movie.getId()+ ", Title:"+movie.getTitle());

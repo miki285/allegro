@@ -15,21 +15,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class MovieRestApiControler {
-
-    private MovieService movieService;
     @Autowired
-    public MovieRestApiControler (MovieService movieService){
-        this.movieService=movieService;
-    }
+    private MovieService movieService;
+
     // GET list of movies
     @GetMapping("/movie")
     public ResponseEntity<?> listAllMovies() {
-        List<String> moviesList= movieService.findAll();
+        List<String> moviesList= movieService.listAllFiles();
         if(moviesList.isEmpty())
             return new ResponseEntity<>(new CustomMessage("No movies in database."),
-                    HttpStatus.NO_CONTENT);
+                    HttpStatus.NOT_FOUND);
         else
-            return new ResponseEntity<>(movieService.findAll(),
+            return new ResponseEntity<>(movieService.listAllFiles(),
                 HttpStatus.OK);
     }
     //GET details about movie[id]
